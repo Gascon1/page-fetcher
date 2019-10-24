@@ -12,13 +12,14 @@ request(url, (error, response, body) => {
   else {
     
     fs.writeFile(path, body, (err) => {
-      // fix this sync part TOMORROW
-      let stats = fs.statSync(path);
-      let size = stats['size'];
-      console.log(`Downloaded and saved ${size} bytes to ${path}`)
       if (err) {
         throw err;
       }
+      fs.stat(path, function(err, stats){
+      let size = stats['size'];
+      console.log(`Downloaded and saved ${size} bytes to ${path}`)
+        
+      });
     })
   }
 });
